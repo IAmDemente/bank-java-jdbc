@@ -110,7 +110,7 @@ public class ContaDAO {
     }
 
     public Conta listarPorNumero(Integer numero){
-        String sql = "select * from conta where numero = " + numero + "and esta_ativa = true";
+        String sql = "select * from conta where numero = ? and ativo = true";
 
         PreparedStatement ps;
         ResultSet resultSet;
@@ -127,12 +127,12 @@ public class ContaDAO {
                 String nome = resultSet.getString(3);
                 String cpf = resultSet.getString(4);
                 String email = resultSet.getString(5);
-                boolean estaAtiva = resultSet.getBoolean(6);
+                boolean ativo = resultSet.getBoolean(6);
 
                 DadosCadastroCliente dadosCadastroCliente = new DadosCadastroCliente(nome, cpf, email);
                 Cliente cliente = new Cliente(dadosCadastroCliente);
 
-                conta = new Conta(numeroRecuperado, saldo, cliente, estaAtiva);
+                conta = new Conta(numeroRecuperado, saldo, cliente, ativo);
             }
 
             resultSet.close();
